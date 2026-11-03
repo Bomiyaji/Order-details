@@ -188,36 +188,6 @@
       gap: 12px;
     }
 
-    /* Multiple Color Selection Checkboxes */
-    .color-options-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      background: #fafafa;
-      padding: 10px;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-    }
-
-    .color-checkbox-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      padding: 6px;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    .color-checkbox-label input {
-      accent-color: var(--fk-blue);
-      width: 16px;
-      height: 16px;
-    }
-
     /* Buttons */
     .btn-action {
       width: 100%;
@@ -466,17 +436,32 @@
             </div>
           </div>
 
-          <!-- Multiple Color Checkboxes -->
+          <!-- Comprehensive Color Dropdown (Anarkali Special) -->
           <div class="form-group">
-            <label><i class="fa-solid fa-palette"></i> Select Colors (Multiple Selection Available) *</label>
-            <div class="color-options-grid">
-              <label class="color-checkbox-label"><input type="checkbox" name="colors" value="Yellow / Multi"> Yellow / Multi</label>
-              <label class="color-checkbox-label"><input type="checkbox" name="colors" value="Red"> Red</label>
-              <label class="color-checkbox-label"><input type="checkbox" name="colors" value="Pink"> Pink</label>
-              <label class="color-checkbox-label"><input type="checkbox" name="colors" value="Green"> Green</label>
-              <label class="color-checkbox-label"><input type="checkbox" name="colors" value="Blue"> Blue</label>
-              <label class="color-checkbox-label"><input type="checkbox" name="colors" value="Maroon"> Maroon</label>
-            </div>
+            <label><i class="fa-solid fa-palette"></i> Select Color *</label>
+            <select id="custColor" class="form-control" required>
+              <option value="">Choose Kurti Color</option>
+              <option value="Yellow / Multi">Yellow / Multi</option>
+              <option value="Royal Blue">Royal Blue</option>
+              <option value="Navy Blue">Navy Blue</option>
+              <option value="Maroon">Maroon</option>
+              <option value="Bottle Green">Bottle Green</option>
+              <option value="Mint Green">Mint Green</option>
+              <option value="Baby Pink">Baby Pink</option>
+              <option value="Hot Pink">Hot Pink</option>
+              <option value="Peach">Peach</option>
+              <option value="Mustard Yellow">Mustard Yellow</option>
+              <option value="Crimson Red">Crimson Red</option>
+              <option value="Wine">Wine</option>
+              <option value="Teal Blue">Teal Blue</option>
+              <option value="Lavender">Lavender</option>
+              <option value="Turquoise">Turquoise</option>
+              <option value="Coral">Coral</option>
+              <option value="Mustard">Mustard</option>
+              <option value="Off White / Cream">Off White / Cream</option>
+              <option value="Classic Black">Classic Black</option>
+              <option value="Multi-Color Designer">Multi-Color Designer</option>
+            </select>
           </div>
 
           <div class="form-group">
@@ -551,8 +536,8 @@
             <span id="revLocation"></span>
           </div>
           <div class="review-row">
-            <span>Selected Colors:</span>
-            <span id="revColors"></span>
+            <span>Selected Color:</span>
+            <span id="revColor"></span>
           </div>
           <div class="review-row">
             <span>Selected Size:</span>
@@ -640,23 +625,12 @@
         return;
       }
 
-      // Collect Selected Colors
-      const selectedColors = [];
-      document.querySelectorAll('input[name="colors"]:checked').forEach((checkbox) => {
-        selectedColors.push(checkbox.value);
-      });
-
-      if (selectedColors.length === 0) {
-        alert('Please select at least one color!');
-        return;
-      }
-
       // Populate Review Fields
       document.getElementById('revName').innerText = document.getElementById('custName').value;
       document.getElementById('revPhone').innerText = document.getElementById('custPhone').value;
       document.getElementById('revAddress').innerText = document.getElementById('custAddress').value;
       document.getElementById('revLocation').innerText = document.getElementById('custState').value + ' - ' + document.getElementById('custPincode').value;
-      document.getElementById('revColors').innerText = selectedColors.join(', ');
+      document.getElementById('revColor').innerText = document.getElementById('custColor').value;
       document.getElementById('revSize').innerText = document.getElementById('custSize').value;
 
       switchStep('step2');
@@ -687,7 +661,6 @@
 
     function payNowAction() {
       alert("Redirecting to Payment Gateway...");
-      // In future, you can redirect customer to your UPI / Razorpay link here
     }
 
     function switchStep(stepId) {
